@@ -32,7 +32,7 @@ app.use('/api/v1/', adminRouter);
 app.use('/api/v1/', expensesRouter);
 
 
-mongoose.connect(process.env.DB, (err) => {
+mongoose.connect(process.env.DB || "mongodb+srv://anil:anil1@anil.1b2tq8y.mongodb.net/?retryWrites=true&w=majority", (err) => {
     if(err){
         console.log(err);
     }
