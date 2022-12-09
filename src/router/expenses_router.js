@@ -9,7 +9,7 @@ const router = express();
 router.post('/expenses', expenseControllers.AddExpenses);
 router.get('/expenses', expenseControllers.getExpensesById);
 router.put('/expenses', expenseControllers.UpdateExpenses);
-router.delete('/expenses', expenseControllers.DeleteExpenses);
+router.delete('/expenses/:id', expenseControllers.DeleteExpenses);
 
 
 module.exports = router;
