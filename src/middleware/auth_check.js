@@ -7,15 +7,13 @@ const Admin = require('../models/admin_model');
 const SECRET = "demo@1234"
 exports.veriftToken = (req, res, next) => {
     const auth= req.headers.authorization;
-    console.log(auth)
-    const token  = auth.split(' ')[1];
-    console.log(token)
-    if (!token) {
+    if(!auth){
         return res.status(403).send({
             message: " There will be No Token "
         })
     }
-
+    const token  = auth.split(' ')[1];
+    console.log(token)
     jwt.verify(token, process.env.SECRET || SECRET , (err, decoded) => {
         if (err) {
             return res.status(401).send({
