@@ -33,18 +33,20 @@ exports.signin = async (req,res) => {
     console.log(userDetails)
     if(!userDetails){
        return  res.status(401).send({message: "Email is not register "});
+    }else{
+        const isPasswordValid = bcrypt.compareSync(req.body.password , userDetails[0].password );
+        if(!isPasswordValid){
+             return  res.status(401).send({message: "Password not match "})
+        }
+        const token = jwt.sign({id: userDetails._id}, process.env.SECRET,{
+            expiresIn: "1d"
+        })
+        console.log(token);
+        res.status(200).json({
+            accesstoken : token
+        })
     }
-    const isPasswordValid = bcrypt.compareSync(req.body.password , userDetails[0].password );
-    if(!isPasswordValid){
-         return  res.status(401).send({message: "Password not match "})
-    }
-    const token = jwt.sign({id: userDetails._id}, process.env.SECRET,{
-        expiresIn: "1d"
-    })
-    console.log(token);
-    res.status(200).json({
-        accesstoken : token
-    })
+   
 }catch(err){
     console.log(err);
     res.status(400).send({message: err.message});
