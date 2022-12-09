@@ -8,7 +8,7 @@ const router = express();
 
 router.post('/expenses', expenseControllers.AddExpenses);
 router.get('/expenses', expenseControllers.getExpensesById);
-router.put('/expenses', expenseControllers.UpdateExpenses);
+router.put('/expenses/:id', expenseControllers.UpdateExpenses);
 router.delete('/expenses/:id', expenseControllers.DeleteExpenses);
 
 
