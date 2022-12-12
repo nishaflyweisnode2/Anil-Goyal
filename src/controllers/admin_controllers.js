@@ -28,17 +28,19 @@ exports.signIn = async(req,res) =>{
 try{
    const adminDetails = await admin.find({email: req.body.email});
    console.log(adminDetails);
-   if(!adminDetails){
+   if(adminDetails.length ==0){
     res.status(400).json({message: "Email is not register for admin "})
+   }else{
+    const isPasswordValid = bcrypt.compareSync(req.body.password, adminDetails[0].password);
+    if(!isPasswordValid){
+     res.status(401).json({message: "Password is not Match retry "})
+    }
+    const token = jwt.sign({id: adminDetails[0]._id}, process.env.SECRET, {
+     expiresIn: "1d"
+    })
+    res.status(200).json({accessToken : token});
    }
-   const isPasswordValid = bcrypt.compareSync(req.body.password, adminDetails[0].password);
-   if(!isPasswordValid){
-    res.status(401).json({message: "Password is not Match retry "})
-   }
-   const token = jwt.sign({id: adminDetails[0]._id}, process.env.SECRET, {
-    expiresIn: "1d"
-   })
-   res.status(200).json({accessToken : token});
+  
 }catch(err){
     console.log(err);
     res.status(401).json({message: err.message});
