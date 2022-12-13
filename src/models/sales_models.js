@@ -5,7 +5,6 @@ const salesSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.ObjectId,
         ref: "users",
-        unique: true,
         required: true,
     },
     productId: {
