@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const admin = require('../models/admin_model');
-
+const user = require('../models/user_models');
+const sales = require('../models/sales_models')
 
 
 
@@ -51,3 +52,34 @@ try{
 
 
 
+exports.GetAllSuplier = async(req,res) => {
+    try{
+const userData = await user.find({role: "supplier"})
+res.status(200).json({
+    details: userData
+})
+    }catch(err){
+        console.log(err);
+    }
+}
+
+exports.GetAllCuestomer = async(req,res) => {
+    try{
+const userData = await user.find({role: "cuestomer"})
+res.status(200).json({
+    details: userData
+})
+    }catch(err){
+        console.log(err);
+    }
+}
+
+
+exports.GetAllSales = async(req,res) => {
+    try{
+    const data = await sales.find();
+    res.status(200).json({details: data})
+    }catch(err){
+        res.status(400).json({message: err.message})
+    }
+}

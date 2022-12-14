@@ -9,6 +9,8 @@ const SalesRouter = require('./src/router/sales_router');
 const productRouter = require('./src/router/product_router')
 const adminRouter = require('./src/router/admin_router');
 const expensesRouter = require('./src/router/expenses_router');
+const InvoiceRouter = require('./src/router/invoicesRoter');
+//const dues = require('./src/router/duesapi');
 
 
 const app = express();
@@ -26,10 +28,12 @@ app.get('/', (req,res) => {
 
 app.use('/api/v1/', authRouter);
 app.use('/api/v1/', businessRouter);
-app.use('/api/v1/', SalesRouter);
+app.use('/api/v1/sales', SalesRouter);
 app.use('/api/v1/', productRouter);
 app.use('/api/v1/', adminRouter);
 app.use('/api/v1/', expensesRouter);
+app.use('/api/v1/', InvoiceRouter);
+//app.use('/api/v1/dues',dues)
 
 
 mongoose.connect(process.env.DB || "mongodb+srv://anil:anil1@anil.1b2tq8y.mongodb.net/?retryWrites=true&w=majority", (err) => {

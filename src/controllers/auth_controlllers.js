@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
 
 const user = require('../models/user_models');
-const User = require('../models/user_models');
+
 
 exports.signup = async(req,res) =>{
     try{
@@ -74,7 +74,7 @@ exports.UpdateUser = async(req,res) => {
 
 exports.cuestomerCout = async(req,res) => {
     try{
-    const cuestomerData = await User.find({role: "cuestomer"})
+    const cuestomerData = await user.find({role: "cuestomer"})
     console.log(cuestomerData.length);
     res.status(200).json({
         message:    `Total Cuestomer ${cuestomerData.length}`
@@ -91,7 +91,7 @@ exports.cuestomerCout = async(req,res) => {
 
 exports.supplierCout = async(req,res) => {
     try{
-    const cuestomerData = await User.find({role: "supplier"})
+    const cuestomerData = await user.find({role: "supplier"})
     console.log(cuestomerData.length);
     res.status(200).json({
         message:    `Total Supplier ${cuestomerData.length}`
@@ -103,6 +103,29 @@ exports.supplierCout = async(req,res) => {
         })
     }
 
+}
+
+exports.GetAllSuplier = async(req,res) => {
+    try{
+const userData = await user.find({role: "supplier"})
+res.status(200).json({
+    details: userData
+})
+    }catch(err){
+        console.log(err);
+    }
+}
+
+
+exports.GetAllSuplier = async(req,res) => {
+    try{
+const userData = await user.find({role: "cuestomer"})
+res.status(200).json({
+    details: userData
+})
+    }catch(err){
+        console.log(err);
+    }
 }
 
 

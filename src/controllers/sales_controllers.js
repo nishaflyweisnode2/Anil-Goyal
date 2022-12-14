@@ -89,8 +89,7 @@ exports.DeleteSalesById = async(req,res) => {
 exports.getSalesDue = async(req,res) =>{
     try{
     const SalesDues = await sales.find();
-// console.log(SalesDues);
- SalesDues.forEach(data => {
+    SalesDues.forEach(data => {
         const due = data.due
         if(due >= 1){
             console.log("Get Dues ")
@@ -99,6 +98,9 @@ exports.getSalesDue = async(req,res) =>{
     })  
     }catch(err){
         console.log(err)
+        res.status(400).json({
+            err: err.message
+        })
     }
 }
 
@@ -109,12 +111,16 @@ exports.getSupplierwithDues = async(req,res) => {
     data.forEach(d => {
       const DuesData =  sales.find({userId: d._id})
       DuesData.then((da => {
+        if(da.length == 0){
+            res.json({details: "No Supplier Dues Data here "})
+        }else{
         da.forEach(DueData => {
             const dues = DueData.due;
             if(dues >=1 ){
                 res.status(200).json({details: DueData});
             }
         })
+    }
       }))
     })
     }catch(err){
@@ -129,15 +135,23 @@ exports.getCuestomerwithDues = async(req,res) => {
     data.forEach(d => {
       const DuesData =  sales.find({userId: d._id})
       DuesData.then((da => {
+        if(da.length == 0){
+            console.log("Added")
+            res.json({details: "No Cuestomer Dues Data here "});
+          }else{
         da.forEach(DueData => {
+            console.log(DueData.due)
             const dues = DueData.due;
             if(dues >=1 ){
                 res.status(200).json({details: DueData});
             }
         })
+    }
       }))
     })
     }catch(err){
         console.log(err);
+        res.status(400).json({message: err.message})
     }
 }
+
