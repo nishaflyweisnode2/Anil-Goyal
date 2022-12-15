@@ -59,6 +59,17 @@ res.status(200).json({
     }
 }
 
+exports.DeleteUsers = async(req,res) => {
+    try{
+        await user.findByIdAndDelete({_id: req.params.id})
+        res.status(200).json({
+            message: "Users Deleted  Deleted "
+        })
+    }catch(err){
+        res.status(400).json({message: err.message})
+    }
+}
+
 exports.GetAllSuplier = async(req,res) => {
     try{
 const userData = await user.find({role: "supplier"})
