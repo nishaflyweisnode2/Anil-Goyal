@@ -30,7 +30,7 @@ exports.createInvoice = async(req,res) => {
         price: req.body.price, 
         total: Total(req.body.price, req.body.quantity),
         quantity: req.body.quantity,
-       GrandTotal: grandTotal(Add)
+       GrandTotal: parseInt(grandTotal(Add))
     }
     console.log(data)
     const InvoiceData = await Invoice.create(data);
