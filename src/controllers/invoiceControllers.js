@@ -26,7 +26,7 @@ exports.createInvoice = async(req,res) => {
         Mobile: req.body.mobile, 
         date: new Date(), 
         Status : req.body.Status, 
-        productname: req.body.productname, 
+        productName: req.body.productname, 
         price: req.body.price, 
         total: Total(req.body.price, req.body.quantity),
         quantity: req.body.quantity,

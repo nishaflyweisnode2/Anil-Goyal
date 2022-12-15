@@ -25,7 +25,7 @@ const invoiceSchema = mongoose.Schema({
         type: Date
     }, 
     GrandTotal: {
-        type: Number
+        type: String
     }, 
     Status: {
         type: String
