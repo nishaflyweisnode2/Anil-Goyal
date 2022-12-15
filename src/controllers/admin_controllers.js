@@ -48,8 +48,16 @@ try{
 }
 
 
-
-
+exports.GetAllUsers = async(req,res) => {
+    try{
+const userData = await user.find()
+res.status(200).json({
+    details: userData
+})
+    }catch(err){
+        console.log(err);
+    }
+}
 
 exports.GetAllSuplier = async(req,res) => {
     try{

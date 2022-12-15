@@ -18,6 +18,7 @@ router.get('/admin/supplier', adminControllers.GetAllSuplier);
 router.get('/admin/cuestomer', adminControllers.GetAllCuestomer)
 router.get('/admin/sales/all', adminControllers.GetAllSales)
 router.get('/admin/payment', paymentControllers.getAllPayments)
+router.get('admin/all', adminControllers.GetAllUsers);
 
 
 
