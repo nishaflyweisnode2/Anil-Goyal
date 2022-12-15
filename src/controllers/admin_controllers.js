@@ -44,7 +44,7 @@ try{
   
 }catch(err){
     console.log(err);
-    res.status(401).json({message: err.message});
+    res.status(400).json({message: err.message});
 }
 }
 
