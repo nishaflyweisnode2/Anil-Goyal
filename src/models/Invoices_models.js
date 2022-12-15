@@ -6,6 +6,10 @@ const invoiceSchema = mongoose.Schema({
         type: String, 
         require: true
     }, 
+    name : {
+        type : String , 
+        require : true
+    } ,
     amount : {
         type: Number,
         required: true, 
@@ -25,8 +29,7 @@ const invoiceSchema = mongoose.Schema({
     }, 
     Status: {
         type: String
-    }, 
-    productId : [], 
+    },
     productName: [], 
     price: [], 
     quantity: [], 

@@ -20,12 +20,12 @@ exports.createInvoice = async(req,res) => {
         const Add = Total(req.body.price, req.body.quantity)
     const data = {
         appName: "Accounting App", 
+        name : req.body.name ,
         amount: req.body.amount, 
         address : req.body.address, 
         Mobile: req.body.mobile, 
         date: new Date(), 
         Status : req.body.Status, 
-        productId: req.body.productId, 
         productname: req.body.productname, 
         price: req.body.price, 
         total: Total(req.body.price, req.body.quantity),
@@ -80,7 +80,7 @@ exports.UpdateInvoice = async(req,res) => {
         Mobile: req.body.mobile, 
         date: new Date(), 
         Status : req.body.Status, 
-        productId: req.body.productId, 
+        name : req.body.name ,
         productname: req.body.productname, 
         price: req.body.price, 
         total: Total(req.body.price, req.body.quantity),
@@ -101,7 +101,7 @@ exports.DeleteInvoice = async(req,res) => {
     try{
     await Invoice.findByIdAndDelete({_id: req.params.id})
     res.status(200).json({
-        message: "Invocied Deleted "
+        message: "Invocie Deleted "
     })
     }catch(err){
         res.status(400).json({

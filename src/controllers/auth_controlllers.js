@@ -72,6 +72,7 @@ exports.UpdateUser = async(req,res) => {
 }
 
 
+
 exports.cuestomerCout = async(req,res) => {
     try{
     const cuestomerData = await user.find({role: "cuestomer"})
