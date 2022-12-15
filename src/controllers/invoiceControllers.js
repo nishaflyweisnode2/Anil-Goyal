@@ -85,7 +85,7 @@ exports.UpdateInvoice = async(req,res) => {
         price: req.body.price, 
         total: Total(req.body.price, req.body.quantity),
         quantity: req.body.quantity,
-       GrandTotal: grandTotal(Add)
+       GrandTotal: parseInt(grandTotal(Add))
     })
     res.status(200).json({
         message: "Invoiced Data Updated "
