@@ -88,14 +88,8 @@ exports.DeleteSalesById = async(req,res) => {
 
 exports.getSalesDue = async(req,res) =>{
     try{
-    const SalesDues = await sales.find();
-    SalesDues.forEach(data => {
-        const due = data.due
-        if(due >= 1){
-            console.log("Get Dues ")
-            res.status(200).json({details: data})
-        }
-    })  
+    const SalesDues = await sales.find({ due: { $gt: 0 } });
+    res.status(200).json({details: SalesDues})
     }catch(err){
         console.log(err)
         res.status(400).json({
@@ -106,18 +100,23 @@ exports.getSalesDue = async(req,res) =>{
 
 
 exports.getSupplierwithDues = async(req,res) => {
+
     try{
+        console.log("Error")
     const data = await user.find({role: "supplier"});
+    console.log(data)
     data.forEach(d => {
       const DuesData =  sales.find({userId: d._id})
+
       DuesData.then((da => {
+        console.log(da)
         if(da.length == 0){
-            res.json({details: "No Supplier Dues Data here "})
+        //  return   res.send({details: "No Supplier Dues Data here "})
         }else{
         da.forEach(DueData => {
             const dues = DueData.due;
-            if(dues >=1 ){
-                res.status(200).json({details: DueData});
+            if(dues >0 ){
+             res.status(200).json({details: DueData});
             }
         })
     }
@@ -125,6 +124,7 @@ exports.getSupplierwithDues = async(req,res) => {
     })
     }catch(err){
         console.log(err);
+        res.status(400).json({message: err.message})
     }
 }
 
@@ -132,18 +132,21 @@ exports.getSupplierwithDues = async(req,res) => {
 exports.getCuestomerwithDues = async(req,res) => {
     try{
     const data = await user.find({role: "cuestomer"});
+    console.log(data)
     data.forEach(d => {
+        console.log(d._id)
       const DuesData =  sales.find({userId: d._id})
       DuesData.then((da => {
+        // console.log(da);
         if(da.length == 0){
             console.log("Added")
-            res.json({details: "No Cuestomer Dues Data here "});
+          // return res.send({details: "No Cuestomer Dues Data here "});
           }else{
         da.forEach(DueData => {
             console.log(DueData.due)
             const dues = DueData.due;
-            if(dues >=1 ){
-                res.status(200).json({details: DueData});
+            if(dues >0 ){
+              return  res.status(200).json({details: DueData});
             }
         })
     }

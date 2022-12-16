@@ -9,7 +9,7 @@ exports.addBusniessDetails = async(req,res) => {
         Name: req.body.Name,
         businessaddress: req.body.businessaddress,
         aadhaarNumber:req.body.aadhaarNumber,
-        busniessnumber: req.body.businessaddress,
+        busniessnumber: req.body.busniessnumber,
         gst: req.body.gst
     }
     console.log(data);
@@ -27,10 +27,15 @@ exports.addBusniessDetails = async(req,res) => {
 exports.getBusniessDetails = async(req,res) => {
     try{
     const details = await busniess.findById({_id: req.params.id});
-    console.log(details);
-    res.status(200).json({
-        details: details
-    })
+    if(!details){
+        res.status(201).json({message: "No Busniess added here fir this ID "})
+    }else{
+        console.log(details);
+        res.status(200).json({
+            details: details
+        })
+    }
+   
 }catch(err){
     console.log(err);
     res.status(400).send({message: err.message});
@@ -63,5 +68,22 @@ exports.DeleteBusinessDetails = async (req,res) =>{
 
 
 
+exports.getBusniessDetailsAll = async(req,res) => {
+    try{
+    const details = await busniess.find();
+    if(!details){
+        res.status(201).json({message: "No Busniess added here fir this ID "})
+    }else{
+        console.log(details);
+        res.status(200).json({
+            details: details
+        })
+    }
+   
+}catch(err){
+    console.log(err);
+    res.status(400).send({message: err.message});
+}
+}
 
 
