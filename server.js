@@ -10,6 +10,7 @@ const productRouter = require('./src/router/product_router')
 const adminRouter = require('./src/router/admin_router');
 const expensesRouter = require('./src/router/expenses_router');
 const InvoiceRouter = require('./src/router/invoicesRoter');
+const quotes = require('./src/router/quotes');
 //const dues = require('./src/router/duesapi');
 
 
@@ -33,6 +34,8 @@ app.use('/api/v1/', productRouter);
 app.use('/api/v1/', adminRouter);
 app.use('/api/v1/', expensesRouter);
 app.use('/api/v1/', InvoiceRouter);
+app.use('/api/v1/', quotes);
+
 //app.use('/api/v1/dues',dues)
 
 
