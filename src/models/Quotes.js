@@ -21,7 +21,7 @@ const quote = mongoose.Schema({
     account  : {
         type: String
     }
-})
+}, {timestrap: true})
 
 
 const quotes = mongoose.model('quote', quote);

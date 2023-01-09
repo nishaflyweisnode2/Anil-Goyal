@@ -82,3 +82,15 @@ exports.DeleteQuotes = async(req,res) => {
         })
     }
 }
+
+exports.getQuotesTotal = async(req,res) => {
+    try{
+        const data = await quotes.find();
+        res.status(200).json({
+            message: "Count ", 
+            data : data.length
+        })
+    }catch(err){
+        res.status(400).json({message: err.message})
+    }
+}

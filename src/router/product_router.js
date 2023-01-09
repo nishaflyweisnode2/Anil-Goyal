@@ -11,7 +11,7 @@ router.get('/product/:id',[veriftToken.veriftToken, productContrllers.GetProduct
 router.put('/product/:id',[ veriftToken.veriftToken, productContrllers.updateProduct]);
 router.delete('/product/:id',[veriftToken.veriftToken, productContrllers.DeleteProductById]);
 router.get('/product',[ veriftToken.veriftToken, productContrllers.getAllProduct]);
-router.get('/product/count', [veriftToken.veriftToken, productContrllers.getAllProductlength]);
+router.get('/products/length', [veriftToken.veriftToken, productContrllers.getAllProductlength]);
 
 module.exports = router ; 
 

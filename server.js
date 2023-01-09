@@ -11,6 +11,7 @@ const adminRouter = require('./src/router/admin_router');
 const expensesRouter = require('./src/router/expenses_router');
 const InvoiceRouter = require('./src/router/invoicesRoter');
 const quotes = require('./src/router/quotes');
+const card = require('./src/router/nfc_router')
 //const dues = require('./src/router/duesapi');
 
 
@@ -27,14 +28,15 @@ app.get('/', (req,res) => {
     res.status(200).send({message: "App Started "})
 });
 
-app.use('/api/v1/', authRouter);
-app.use('/api/v1/', businessRouter);
+app.use('/api/v1', authRouter);
+app.use('/api/v1', businessRouter);
 app.use('/api/v1/sales', SalesRouter);
-app.use('/api/v1/', productRouter);
-app.use('/api/v1/', adminRouter);
-app.use('/api/v1/', expensesRouter);
-app.use('/api/v1/', InvoiceRouter);
-app.use('/api/v1/', quotes);
+app.use('/api/v1', productRouter);
+app.use('/api/v1', adminRouter);
+app.use('/api/v1', expensesRouter);
+app.use('/api/v1', InvoiceRouter);
+app.use('/api/v1', quotes);
+app.use('/api/v1/card', card);
 
 //app.use('/api/v1/dues',dues)
 

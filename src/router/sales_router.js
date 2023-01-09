@@ -9,6 +9,6 @@ router.post('/', SalesControllers.AddSales);
 router.get('/:id', SalesControllers.GetSalesById);
 router.put('/:id', SalesControllers.UpdateSalesById)
 router.delete('/:id', SalesControllers.DeleteSalesById);
-
+router.get('/', SalesControllers.getMonthwieseSales);
 
 module.exports = router;

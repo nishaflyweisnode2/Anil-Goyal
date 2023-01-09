@@ -51,7 +51,7 @@ const salesSchema = mongoose.Schema({
     },
 
 
-})
+}, {timestrap: true});
 
 const sales = mongoose.model('sale', salesSchema);
 

@@ -158,3 +158,24 @@ exports.getCuestomerwithDues = async(req,res) => {
     }
 }
 
+
+
+exports.getMonthwieseSales = async(req,res) => {
+    try{
+    const data =  await sales.aggregate([
+        {
+        $project: {
+            month: {$month: {date:"$date" }}
+        },
+
+    }
+    ])
+    console.log(data)
+    res.status(200).json({
+        message: data
+    })
+    }catch(err)
+    {
+        console.log(err);
+    }
+}

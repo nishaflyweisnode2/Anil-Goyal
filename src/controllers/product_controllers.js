@@ -79,6 +79,11 @@ exports.getAllProduct = async(req , res) => {
 exports.getAllProductlength = async(req , res) => {
     try{
     const productData = await product.find();
+    if(!productData.length){
+        return res.status(500).json({
+            message: "No Product Found "
+        })
+    }
     res.status(200).json({data: productData.length})
     }catch(err){
         console.log(err);

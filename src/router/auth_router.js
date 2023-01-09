@@ -13,7 +13,7 @@ router.put('/users/update/:id', authControllers.UpdateUser);
 router.get('/users/cuestomer', authControllers.cuestomerCout);
 router.get('/users/supplier', authControllers.supplierCout);
 router.post('/users/payment', payment.CreatePaymentOrder),
-router.get('/users/payment/:id', payment.GetPaymentsById)
+router.get('/users/payment/:id', payment.GetPaymentsById);
 router.post('/users/settings/', UserSettings.AddSettings);
 router.put('/users/settings/:id', UserSettings.UpdateSettrings)
 module.exports = router;
