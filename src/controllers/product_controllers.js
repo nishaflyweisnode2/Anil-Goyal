@@ -74,3 +74,14 @@ exports.getAllProduct = async(req , res) => {
         res.status(400).json({message: err.message});
     }
 }
+
+
+exports.getAllProductlength = async(req , res) => {
+    try{
+    const productData = await product.find();
+    res.status(200).json({data: productData.length})
+    }catch(err){
+        console.log(err);
+        res.status(400).json({message: err.message});
+    }
+}
