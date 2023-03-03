@@ -65,7 +65,7 @@ const CreatepartnerID = mongoose.Schema({
     }
     
     
-})
+}, { timestamps: true})
 
 const LabourtoAdmin = mongoose.model('labourPartner', CreatepartnerID);
 

@@ -31,7 +31,7 @@ const expensesSchema = mongoose.Schema({
     billerName: {
         type: String
     }
-})
+}, { timestamps: true})
 
 const expenses = mongoose.model('expense', expensesSchema);
 module.exports = expenses;

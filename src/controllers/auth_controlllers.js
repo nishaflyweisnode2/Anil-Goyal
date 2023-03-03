@@ -29,12 +29,12 @@ exports.signup = async(req,res) =>{
 
 exports.signin = async (req,res) => {
     try{
-    const userDetails = await user.find({email: req.body.email});
+    const userDetails = await user.findOne({email: req.body.email});
     console.log(userDetails)
     if(!userDetails){
        return  res.status(401).send({message: "Email is not register "});
     }else{
-        const isPasswordValid = bcrypt.compareSync(req.body.password , userDetails[0].password );
+        const isPasswordValid = bcrypt.compareSync(req.body.password , userDetails.password );
         if(!isPasswordValid){
              return  res.status(401).send({message: "Password not match "})
         }
@@ -43,7 +43,8 @@ exports.signin = async (req,res) => {
         })
         console.log(token);
         res.status(200).json({
-            accesstoken : token
+            accesstoken : token,
+            userID: userDetails._id
         })
     }
    

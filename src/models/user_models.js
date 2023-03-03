@@ -39,7 +39,7 @@ const userSchema = mongoose.Schema({
         default: "cuestomer",
         enum: ['cuestomer', 'supplier']
     }
-})
+} ,{ timestamps: true })
 
 const User = mongoose.model('users', userSchema);
 

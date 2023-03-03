@@ -28,7 +28,7 @@ const businessSchema = mongoose.Schema({
       gst: {
         type: String
       }
-})
+}, { timestamps: true})
 
 const busniess  = mongoose.model('busniess', businessSchema);
 

@@ -2,7 +2,7 @@ const express =  require('express');
 const adminControllers = require('../controllers/admin_controllers');
 const SalesControllers = require('../controllers/sales_controllers');
 const paymentControllers = require('../controllers/paymentControllers');
-
+const comapnyControllers = require('../controllers/comapny_controllers')
 
 
 const router = express();
@@ -20,7 +20,7 @@ router.get('/admin/sales/all', adminControllers.GetAllSales)
 router.get('/admin/payment', paymentControllers.getAllPayments)
 router.get('/admin/all', adminControllers.GetAllUsers);
 router.delete('/admin/delete/:id', adminControllers.DeleteUsers);
-
+router.post('/company',comapnyControllers.AddCompany )
 
 
 

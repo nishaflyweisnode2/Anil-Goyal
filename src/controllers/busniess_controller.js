@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const busniess = require('../models/business_model');
 const Business = require('../models/business_model');
 
@@ -12,12 +13,45 @@ exports.addBusniessDetails = async(req,res) => {
         busniessnumber: req.body.busniessnumber,
         gst: req.body.gst
     }
-    console.log(data);
-    const details = await Business.create(data);
-    console.log(details);
-    res.status(200).json({
-        details: details._id
+    const Data = await axios({
+        method: "post", 
+        url: "https://commonapi.mastersindia.co/oauth/access_token", 
+        data: {
+            "username":"hunnygoyal789@gmail.com",
+            "password": "Masters@123",
+            "client_id":"LHJLsVnxUIyoaJgMSV",
+            "client_secret":"Z0He404Llhmlc18a4ZGpptRb",
+            "grant_type":"password"
+        }
     })
+    console.log(Data)
+    const header = {
+        Authorization: Data.data.token_type +" " + Data.data.access_token,
+        "client_id":"LHJLsVnxUIyoaJgMSV",
+    }
+    console.log(header)
+    const verifyGst = await axios({
+        method: "get", 
+        url: `https://commonapi.mastersindia.co/commonapis/searchgstin?gstin=${req.body.gst}`,
+        headers: {
+            Authorization: "Bearer " + Data.data.access_token,
+            "client_id":"LHJLsVnxUIyoaJgMSV",
+        }
+    })
+    console.log(verifyGst.data)
+    if(verifyGst.data.error == true){
+        return res.status(500).json({
+            message: verifyGst.data
+        })
+    }else{
+    console.log(data);
+   const details = await Business.create(data);
+   console.log(details);
+    res.status(200).json({
+      details: details._id,
+      verify: verifyGst.data
+    })
+}
 }catch(err){
     console.log(err);
     res.status(400).send({message: err.message});
