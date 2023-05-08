@@ -16,4 +16,7 @@ router.post('/users/payment', payment.CreatePaymentOrder),
 router.get('/users/payment/:id', payment.GetPaymentsById);
 router.post('/users/settings/', UserSettings.AddSettings);
 router.put('/users/settings/:id', UserSettings.UpdateSettrings)
+router.get('/user/:id', authControllers.getByID)
+router.post('/user/forget', authControllers.ForgetPassword);
+router.post('/user/reset', authControllers.ResetPasword)
 module.exports = router;

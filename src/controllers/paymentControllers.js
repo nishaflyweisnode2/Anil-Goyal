@@ -108,6 +108,26 @@ exports.GetPaymentsById = async(req,res) => {
     }
 }
 
+exports.getPaymentByUserId = async(req,res) => {
+    try{
+    const result = await payment.find({userId: req.params.id});
+    if(result.length ==0){
+        return res.status(401).json({
+            message: " No Transctions Found this User"
+        })
+    }
+    res.status(200).json({
+        message: "ok",
+        result: result
+    })
+    }catch(err){
+        console.log(err);
+        res.status(200).json({
+            message: "not ok",
+            error: err.message
+        })
+    }
+}
 
 exports.Getalltransctions = async(req,res) => 
 {

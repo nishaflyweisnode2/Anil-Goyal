@@ -1,10 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const serverless = require('serverless-http')
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const authRouter = require('./src/router/auth_router');
 const businessRouter = require('./src/router/business_router');
+
 const SalesRouter = require('./src/router/sales_router');
 const productRouter = require('./src/router/product_router')
 const adminRouter = require('./src/router/admin_router');
@@ -59,4 +61,10 @@ mongoose.connect(process.env.DB || "mongodb+srv://anil:anil1@anil.1b2tq8y.mongod
 app.listen(process.env.PORT || 4000, () => {
     console.log("Server is Start" , `${process.env.PORT}`);
 } )
+
+
+
+module.exports = {
+    handler: serverless(app)
+}
 

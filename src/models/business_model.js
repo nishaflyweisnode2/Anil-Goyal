@@ -27,6 +27,9 @@ const businessSchema = mongoose.Schema({
     
       gst: {
         type: String
+      },
+      logo: {
+        type: String
       }
 }, { timestamps: true})
 
